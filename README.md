@@ -1,4 +1,4 @@
-# WeChat-WDDN_Project
+# Let'sChat-WDDN_Project
 <h1>Overview</h1>
 This project is a part of WDDN(Web Development in .NET) subject in SEM5.<br/>
 This is a chat application made using asp.net core framework. It is made for one to one chat only. One can able to chat with registered user only after adding one as friend.<br/>
