@@ -1,0 +1,265 @@
+﻿@model ChatApplication.ViewModels.FriendListMessageList
+@inject SignInManager<ApplicationUser> signInManager
+@{
+    ViewData["Title"] = "Home";
+}
+<head>
+    <style>
+        .img-position {
+            position: absolute;
+            top: 8%;
+        }
+
+        .main-container {
+            position: absolute;
+            top: 12%;
+            left: 1.6%;
+            height: 610px;
+            width: 1200px;
+        }
+        .friends {
+            text-decoration: none;
+        }
+
+        .friends:hover {
+            background-color: grey;
+            text-decoration: none;
+        }
+        #chatWindow .container {
+            border: 2px solid #dedede;
+            background-color: #f1f1f1;
+            border-radius: 30px;
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            font-family: "Open Sans", serif;
+        }
+
+        #chatWindow .sender {
+            font-size: 0.8em;
+            font-weight: bold;
+            font-family: 'Shadows Into Light', cursive;
+        }
+
+        /* Darker chat container */
+        #chatWindow .darker {
+            border-color: #fff;
+            background-color: #007bff;
+        }
+
+        /* Clear floats */
+        #chatWindow .container::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Style images */
+        #chatWindow .container img {
+            float: left;
+            max-width: 60px;
+            width: 100%;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+
+            /* Style the right image */
+            #chatWindow .container img.right {
+                float: right;
+                margin-left: 20px;
+                margin-right: 0;
+            }
+
+        /* Style time text */
+        #chatWindow .time-right {
+            float: right;
+            color: #aaa;
+        }
+
+        /* Style time text */
+        #chatWindow .time-left {
+            float: left;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-md navbar-dark bg-dark fixed-top justify-content-start mb-3">
+        <a class="navbar-brand text-light" style="font-size: 1.7vw;" asp-area="" asp-controller="Home" asp-action="Home">
+            <i class="fas fa-comment" style="color: #00BFFF"></i>
+            &nbsp; Let's Chat
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".mainnav" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse mainnav">
+            <ul class="navbar-nav flex-grow-2">
+                <li class="nav-item text-white">
+                    <label style="font-size:1.3vw">@Model.user.UserName</label>
+                </li>
+                <li class="nav-item">
+                    <!--<a class="nav-link text-light" style="font-size:1.3vw" asp-area="" asp-controller="Account" asp-action="logout">
+                        <i class="fas fa-power-off" data-toggle="tooltip" data-placement="bottom" title="Logout"></i>
+                    </a>-->
+                    <form method="post" asp-controller="account" asp-action="logout" asp-route-id="@Model.userID">
+                        <button type="submit" style="width:auto;font-size:1.3vw" class="nav-link btn btn-link py-0">
+                            <i class="fas fa-power-off" data-toggle="tooltip" data-placement="bottom" title="Logout"></i>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <img src="~/images/background_chat1.jpg" class="img-responsive img-position" style="width: 100%;
+            background-position: center;
+            background-repeat:no-repeat;
+            background-attachment:fixed;
+            background-size:cover;
+            background-color:aquamarine;
+            max-height:665px;
+            " />
+    <div class="main-container">
+        <div class="row h-100">
+
+            <div class="col col-lg-8 h-100">
+
+                <div class="container h-100" style="border:1px solid black;background-color:rgb(173,230,230);">
+
+                    <div class="d-flex bg-dark align-content-lg-start">
+                        <a class="p-2 border rounded text-white font-weight-bold"
+                           style="font-size: 1vw;" data-toggle="tooltip" data-placement="top" title="@Model.Fname">
+                            @Model.Fname
+                        </a>
+                        <a class="p-2 border rounded text-white"
+                           style="font-size: 1vw;" asp-area="" asp-controller="Home" asp-action="Home" asp-route-id="@Model.userID"
+                           data-toggle="tooltip" data-placement="top" title="All Friends">
+                            All Friends
+                        </a>
+                        <a class="p-2 border rounded text-white"
+                           style="font-size: 1vw;" asp-area="" asp-controller="Home" asp-action="onlineFriends"
+                           data-toggle="tooltip" data-placement="top" title="Online friends" asp-route-id="@Model.userID">
+                            Online friends
+                        </a>
+                    </div>
+                    <div class="container overflow-auto h-75 bg-light" id="chatWindow">
+                        @if (Model.messeges == null)
+                        {
+                            <h3>You haven't started chatting with @Model.Fname.</h3>
+                        }
+                        @if (Model.messeges != null)
+                        {
+                            @foreach (var m in Model.messeges.OrderBy(m => m.datetime))
+                            {
+                                string containerClass, timePosition, textAlign, contcolor, offset;
+                                if (Model.userID == m.senderID)
+                                {
+                                    containerClass = "container darker";
+                                    timePosition = "time-right text-light";
+                                    textAlign = "text-right text-white";
+                                    contcolor = "bg-primary";
+                                    offset = "col-md-6 offset-md-6";
+                                }
+                                else
+                                {
+                                    containerClass = "container";
+                                    timePosition = "time-left";
+                                    textAlign = "text-left";
+                                    contcolor = "bg-light";
+                                    offset = "";
+                                }
+                                <div class="row">
+                                    <div class="@offset">
+                                        <div class="@containerClass @contcolor">
+
+                                            <!--<p class="sender @textAlign"></p>-->
+                                            <p class="@textAlign">@m.text</p>
+                                            <span class="@timePosition">@m.datetime</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <form method="post" asp-controller="home" asp-action="createMessage">
+                        <input type="hidden" name="friendid" value="@Model.FId" id="receiverid" />
+                        <input type="hidden" name="userid" value="@Model.userID" id="userid" />
+                        <input type="hidden" name="messageid" value="@Model.messeges.Count()" id="messageid" />
+                        <div class="container bg-light">
+                            <br />
+                            <div class="row w-100">
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" style="font-size: 1vw;"
+                                           name="text" placeholder="Enter your message" id="text" />
+                                </div>
+                                <div class="col-lg-2">
+                                    <button type="submit" style="font-size: 1vw; border:none"
+                                            class="form-control rounded-pill bg-success text-white" data-toggle="tooltip" data-placement="top" title="Send">
+                                        <i class="fas fa-paper-plane fa-1x"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col col-lg-4 h-100">
+
+                <div class="container h-100 p-1 bg-warning rounded" style="border:1px solid black">
+
+                    <div class="d-flex bg-dark flex-row-reverse">
+                        <a class="text-dark p-2 bg-white rounded-circle m-2" style="font-size: 2vw;" asp-area="" asp-controller="Friend" asp-action="AddFriend" asp-route-id="@Model.userID">
+
+                            <i class="fas fa-user-plus" style="color: darkslategray" data-toggle="tooltip" data-placement="top" title="Add Friend"></i>
+                        </a>
+                        <a class="text-dark p-2 bg-white rounded-circle m-2" style="font-size: 2vw;" asp-area="" asp-controller="Home" asp-action="AddGroup">
+                            <i class="fas fa-users" style="color: darkslategray" data-toggle="tooltip" data-placement="top" title="Add Group"></i>
+                        </a>
+                        <a class="text-dark p-2 bg-white rounded-circle m-2" style="font-size: 2vw;" asp-area="" asp-controller="Account" asp-action="UpdateProfile" asp-route-id="@Model.userID">
+                            <i class="fas fa-user-edit" style="color: darkslategray" data-toggle="tooltip" data-placement="top" title="Edit your profile"></i>
+                        </a>
+                    </div>
+                    <div class="container bg-light">
+                        @foreach (var friend in Model.friends)
+                        {
+                            <div class="row w-100 bg-light text-dark">
+                                <div class="col col-lg-2">
+                                    <a asp-action="friendProfile" asp-controller="home">
+                                        <img src="~/images/User.png" width="50" height="50" />
+                                    </a>
+                                </div>
+                                <div class="col col-lg-10 friends">
+
+                                    @{ var parms = new Dictionary<string, string>
+                                                                                                                                    {
+                                                { "fid", (friend.friendID).ToString() },
+                                                { "appuserid", Model.user.Id }
+                                            }; }
+                                    <a asp-controller="home" asp-action="showMessages" asp-all-route-data="parms">
+                                        <h5>@friend.fname</h5>
+                                        @friend.mobileno
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--<script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/chat.js"></script>
+    <script src="~/js/SignalRHandler.js"></script>-->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+
+
+</body>

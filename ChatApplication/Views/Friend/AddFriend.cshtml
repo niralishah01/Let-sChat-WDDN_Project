@@ -1,0 +1,132 @@
+﻿@inject SignInManager<ApplicationUser> signInManager
+@model ChatApplication.ViewModels.AddFriendViewodel
+
+@{
+    ViewData["Title"] = "AddFriend";
+    Layout = "/Views/Home/_Layout.cshtml";
+
+}
+    <head>
+        <style>
+            .img-position {
+                position: absolute;
+                top: 8%;
+            }
+
+            .main-container {
+                position: absolute;
+                top: 12%;
+                left: 1.6%;
+                height: 610px;
+                width: 1200px;
+            }
+
+            .centered {
+                position: absolute;
+                top: 25%;
+                left: 25%;
+            }
+        </style>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - ChatApplication</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+
+        <!-- For ICONS -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-md navbar-dark bg-dark fixed-top justify-content-start mb-3">
+            <a class="navbar-brand text-light" style="font-size: 1.7vw;" asp-area="" asp-controller="Home" asp-action="Home">
+                <i class="fas fa-comment" style="color: #00BFFF"></i>
+                &nbsp; Let's Chat
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".mainnav" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse mainnav">
+                <ul class="navbar-nav flex-grow-2">
+                    <li class="nav-item text-white">
+                        <label style="font-size:1.3vw">@Model.user.UserName</label>
+                    </li>
+                    <li class="nav-item">
+                        <!--<a class="nav-link text-light" style="font-size:1.3vw" asp-area="" asp-controller="Account" asp-action="logout">
+                        <i class="fas fa-power-off" data-toggle="tooltip" data-placement="bottom" title="Logout"></i>
+                    </a>-->
+                        <form method="post" asp-controller="account" asp-action="logout">
+                            <button type="submit" style="width:auto;font-size:1.3vw" class="nav-link btn btn-link py-0">
+                                <i class="fas fa-power-off" data-toggle="tooltip" data-placement="bottom" title="Logout"></i>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <img src="~/images/background_chat1.jpg" class="img-responsive img-position" style="width: 100%;
+            background-position: center;
+            background-repeat:no-repeat;
+            background-attachment:fixed;
+            background-size:cover;
+            background-color:aquamarine;
+            max-height:665px;
+            " />
+        <h1>AddFriend</h1>
+
+        <hr />
+        <div class="container">
+            <div class="bg-white centered p-3 w-50 rounded shadow-lg ">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <center>
+                            <h1 style="font-size: 2vw;"><i class="fas fa-comment fa-3x" style="color: #00BFFF;"></i></h1>
+                            <h2 class="text-dark" style="font-size: 2vw;">Add Friend</h2>
+                        </center>
+                    </div>
+                </div>
+                <div asp-validation-summary="All" class="text-danger" style="font-size:0.9vw"></div>
+                @if (@ViewData["err"] != null)
+                {
+                    <p class="text-danger" style="font-size:1.1vw">
+                        @ViewData["err"] <a asp-controller="Account" asp-action="register">https://localhost:44355/Account/register</a>
+                        to chat with him.
+                    </p>
+                }
+
+                <form method="post" asp-controller="Friend" asp-action="AddFriend">
+                    <input type="hidden" style="font-size: 1.2vw;" class="form-control p-2" asp-for="UserId" value="@Model.UserId" readonly />
+                    <div class="row p-2">
+                        <div class="col-lg-4">
+                            <label asp-for="fname" class="control-label" style="font-size: 1vw;"></label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="text" style="font-size: 1.2vw;" class="form-control p-2" asp-for="fname" placeholder="Enter your friend name" />
+                            <span asp-validation-for="fname" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-lg-4">
+                            <label asp-for="mobileno" class="control-label" style="font-size: 1vw;"></label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="text" style="font-size: 1.2vw;" class="form-control p-2" asp-for="mobileno" placeholder="Enter your friend mobile no" />
+                            <span asp-validation-for="mobileno" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row p-2 justify-content-center">
+                        <div class="col-lg-10">
+                            <input type="submit" style="font-size: 1.2vw;" class="form-control btn btn-success p-2" value="Add" />
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4">
+                            <a class="btn btn-danger col-lg-12" style="font-size: 1.2vw;" asp-controller="Home" asp-action="Home" asp-route-id="@Model.UserId">Go back to Home</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </body>

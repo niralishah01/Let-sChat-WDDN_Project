@@ -1,0 +1,63 @@
+﻿@inject SignInManager<ApplicationUser> signInManager
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ChatApplication</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <!-- For ICONS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <style>
+        .img-position {
+            position: absolute;
+            top: 8%;
+        }
+
+        .main-container {
+            position: absolute;
+            top: 12%;
+            left: 1.6%;
+            height: 500px;
+            width: 1200px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-md navbar-dark bg-dark fixed-top justify-content-start mb-3">
+        <a class="navbar-brand text-light" style="font-size: 1.7vw;" asp-area="" asp-controller="Home" asp-action="Home">
+            <i class="fas fa-comment" style="color: #00BFFF"></i>
+            &nbsp; ChatApplication
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".mainnav" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse mainnav">
+            <ul class="navbar-nav flex-grow-2">
+                <li class="nav-item text-white">
+                    <label style="font-size:1.3vw">@User.Identity.Name</label>
+                </li>
+                <li class="nav-item">
+                    <!--<a class="nav-link text-light" style="font-size:1.3vw" asp-area="" asp-controller="Account" asp-action="logout">
+                        <i class="fas fa-power-off" data-toggle="tooltip" data-placement="bottom" title="Logout"></i>
+                    </a>-->
+                    <form method="post" asp-controller="account" asp-action="logout">
+                        <button type="submit" style="width:auto;font-size:1.3vw" class="nav-link btn btn-link py-0">
+                            <i class="fas fa-power-off" data-toggle="tooltip" data-placement="bottom" title="Logout"></i>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <img src="~/images/background_chat1.jpg" class="img-responsive img-position" style="width: 100%;
+            background-position: center;
+            background-repeat:no-repeat;
+            background-attachment:fixed;
+            background-size:cover;
+            background-color:aquamarine;
+            max-height:665px;
+            " />
+    @RenderBody()
+    
+</body>

@@ -1,0 +1,198 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <style>
+        .centered {
+            position: absolute;
+            top: 12%;
+            left: 21%;
+        }
+
+        .centered-next-1 {
+            position: absolute;
+            top: 23%;
+            left: 25%;
+        }
+
+        .centered-next-2 {
+            position: absolute;
+            top: 60%;
+            left: 26%;
+        }
+
+        .centered-next-3 {
+            position: absolute;
+            top: 95%;
+            left: 13%;
+        }
+    </style>
+    <!-- For ICONS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-md navbar-dark bg-dark fixed-top justify-content-start mb-3">
+    <a class="navbar-brand text-light" style="font-size: 1.7vw;" asp-area="" asp-controller="Home" asp-action="Index">
+        <i class="fas fa-comment" style="color: #00BFFF"></i>
+        &nbsp; Let's Chat
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+        <ul class="navbar-nav flex-grow-2">
+            <li class="nav-item">
+                <a class="nav-link text-light" style="font-size:1.3vw" asp-area="" asp-controller="Home" asp-action="Index">
+                    Home
+                    <i class="fas fa-home" data-toggle="tooltip" data-placement="bottom" title="Home"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" style="font-size:1.3vw" href="#FAQ">
+                    FAQ
+                    <i class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Ask Question"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" style="font-size:1.3vw" href="#contact">
+                    Contact
+                    <i class="fas fa-phone-square" data-toggle="tooltip" data-placement="bottom" title="Contact us"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" style="font-size:1.3vw" asp-area="" asp-controller="Account" asp-action="register">
+                    Register
+                    <i class="fas fa-address-book" data-toggle="tooltip" data-placement="bottom" title="Register"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" style="font-size:1.3vw" asp-area="" asp-controller="Account" asp-action="login">
+                    Login
+                    <i class="fas fa-sign-in-alt" data-toggle="tooltip" data-placement="bottom" title="Login"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- <i class="fas fa-sign-out-alt"></i> Sign out/ logout-->
+<img src="~/images/background_chat1.jpg" class="img-responsive" style="width: 100%;
+    background-position: center;
+    background-repeat:repeat;
+    background-attachment:scroll;
+    background-size:100%;
+    background-color:aquamarine;
+" />
+<div class="container" style="overflow-y: auto;">
+    <!--<img src="~/images/background_chat.jpg" class="img-responsive" style="width:100%; height:auto;background-position: center; background-repeat: no-repeat; background-size: cover;" />-->
+    <!-- Heading  -->
+    <h1 class="centered" style="font-size:3vw;">Welcome to the amazing Chat-Application</h1>
+
+    <!-- Carousel for displaying functionality -->
+    <div id="functionality" class="carousel slide w-50 mx-auto centered-next-1" data-ride="carousel">
+
+        <ul class="carousel-indicators">
+            <li data-target="#functionality" data-slide-to="0" class="active"></li>
+            <li data-target="#functionality" data-slide-to="1"></li>
+            <li data-target="#functionality" data-slide-to="2"></li>
+            <li data-target="#functionality" data-slide-to="3"></li>
+        </ul>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-interval="2000">
+                <center>
+                    <h1 style="font-size:3.2vw;">
+                        <i class="fas fa-comment-dots fa-5x"></i>
+                    </h1>
+                </center>
+                <br /><br /><br /><br />
+                <div class="carousel-caption text-dark">
+                    <h2 style="font-size:2.5vw;">Chat with friends</h2>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="2000">
+                <center>
+                    <h1 style="font-size:3.2vw;">
+                        <i class="fas fa-comments fa-5x"></i>
+                    </h1>
+                </center>
+                <br /><br /><br /><br />
+                <div class="carousel-caption text-dark">
+                    <h2 style="font-size:2.5vw;">Chat with groups</h2>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="2000">
+                <center>
+                    <h1 style="font-size:3.2vw;">
+                        <i class="fas fa-file-upload fa-5x"></i>
+                    </h1>
+                </center>
+                <br /><br /><br /><br />
+                <div class="carousel-caption text-dark">
+                    <h2 style="font-size:2.5vw;">Send files or other documents</h2>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="2000">
+                <center>
+                    <h1 style="font-size:3.2vw;">
+                        <i class="fas fa-user-clock fa-5x"></i>
+                    </h1>
+                </center>
+                <br /><br /><br /><br />
+                <div class="carousel-caption text-dark">
+                    <h2 style="font-size:2.5vw;">View Online Friends</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="container" style="font-size:1.3vw;" id="FAQ">
+        <div class="bg-white centered-next-2 w-50 rounded ">
+            <form action="">
+                <div class="row p-2">
+                    <div class="col col-lg-12">
+                        <center><b style="font-size:2vw;">Ask any question</b></center>
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col col-lg-12">
+                        <input type="text" style="font-size:1.2vw;" class="form-control" id="email_id" placeholder="Enter your email-id" />
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col col-lg-12">
+                        <textarea class="form-control" style="font-size:1.2vw;" id="message" rows="3" placeholder="Enter your question here.."></textarea>
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col col-lg-12">
+                        <input type="submit" style="font-size:1.2vw;" class="btn btn-success" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Contact -->
+<!--<div class="container centered-next-3 w-75 mx-auto" style="font-size:1.3vw;border:1px solid black;" id="contact">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-6 col-sm-5 col-xs-4 rounded bg-white">
+            <form action="">
+                <div class="form-group row p-2">
+                    <label class="col-lg-12"><center><b style="font-size:2vw;">Contact information</b></center></label>
+                </div>
+                <div class="form-group row p-2">
+                    <label for="email_id" class="col-sm-6 col-md-5 col-lg-4">Contact no.</label>
+                    <label for="email_id"  class="form-control col-sm-6 col-md-7 col-lg-8">
+                        xjndjsjnsjd
+                        djdnsndsds
+                        dnsjdnsjndjsnjj
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>-->
