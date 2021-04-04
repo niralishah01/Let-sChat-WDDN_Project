@@ -5,7 +5,7 @@ This is a chat application made using asp.net core framework. It is made for one
 It can be further extended for group chatting.
 
 <h2>Link for Demo</h2>
-https://drive.google.com/file/d/1EG4ebN26IBpnwOvuCAz1Kt7dlhDDWwRi/view?usp=drivesdk
+<a href="https://drive.google.com/file/d/1EG4ebN26IBpnwOvuCAz1Kt7dlhDDWwRi/view?usp=drivesdk">Project Demo</a>
 
 <h2>Prepared By:</h2>
 <p>Nirali P Shah - 18CEUOS059</p>
